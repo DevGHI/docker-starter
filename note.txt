@@ -1,0 +1,2 @@
+docker build .
+docker run -p 4444:8000 container_id
