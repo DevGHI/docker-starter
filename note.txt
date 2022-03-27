@@ -1,2 +1,6 @@
 docker build .
 docker run -p 4444:8000 container_id
+docker run -p 4000:8000 -v $(pwd):/usr/src/app f9294c23ddf7
+docker build -f Dockerfile.production .
+docker build -t yeyintko/deploy-python-docker -f Dockerfile.production .
+docker push yeyintko/deploy-python-docker 

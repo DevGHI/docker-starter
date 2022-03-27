@@ -7,14 +7,15 @@ WORKDIR /usr/src/app
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV port=8000
 # install dependencies
 RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
+ENV port=8000
+
 # copy project
 COPY . .
 
 EXPOSE $port
-CMD python manage.py runserver 0.0.0:$port
+CMD gunicorn dockerbackend.wsgi:application --bind 0.0.0.0:$port
