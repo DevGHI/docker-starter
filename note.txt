@@ -3,4 +3,16 @@ docker run -p 4444:8000 container_id
 docker run -p 4000:8000 -v $(pwd):/usr/src/app f9294c23ddf7
 docker build -f Dockerfile.production .
 docker build -t yeyintko/deploy-python-docker -f Dockerfile.production .
+
+//docker buildx build --platform linux/amd64,linux/arm64 -t yeyintko/deploy-python-docker -f Dockerfile.production .
+
+
 docker push yeyintko/deploy-python-docker 
+
+docker login
+docker run -p 8888:8000 yeyintko/deploy-python-docker
+docker run -d -p 8080:8000 yeyintko/deploy-python-docker    // run background
+//docker run -it --rm --platform linux/amd64 -p 8080:8000 yeyintko/deploy-python-docker
+
+
+docker run -p 7777:8000 yeyintko/deploy-python-docker:v2
